@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/space_16"
+        android:layout_marginTop="@dimen/space_24"
+        android:thumb="@drawable/selector_switch_thumb"
+        app:track="@drawable/selector_switch_track"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/top_user_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
+        android:paddingHorizontal="@dimen/space_16"
         android:paddingBottom="30dp" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="6dp"
+        android:layout_height="@dimen/space_6"
         android:background="@color/F7CE7F" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/bottom_user_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="30dp" />
+        android:paddingHorizontal="@dimen/space_16"
+        android:paddingBottom="@dimen/space_30" />
 
 </LinearLayout>
