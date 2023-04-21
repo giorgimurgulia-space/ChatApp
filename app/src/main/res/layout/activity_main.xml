@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginEnd="@dimen/space_16"
-        android:layout_marginTop="@dimen/space_24"
+        android:layout_marginEnd="@dimen/dimen_16_dp"
+        android:layout_marginTop="@dimen/dimen_24_sp"
         android:thumb="@drawable/selector_switch_thumb"
         app:track="@drawable/selector_switch_track"/>
 
@@ -21,12 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="@dimen/space_16"
+        android:paddingHorizontal="@dimen/dimen_16_dp"
         android:paddingBottom="30dp" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/space_6"
+        android:layout_height="@dimen/dimen_6_dp"
         android:background="@color/F7CE7F" />
 
     <androidx.fragment.app.FragmentContainerView
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="@dimen/space_16"
-        android:paddingBottom="@dimen/space_30" />
+        android:paddingHorizontal="@dimen/dimen_16_dp"
+        android:paddingBottom="@dimen/dimen_30_dp" />
 
 </LinearLayout>

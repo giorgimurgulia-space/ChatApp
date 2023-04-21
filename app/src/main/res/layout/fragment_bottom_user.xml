@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_edit_text_background"
         android:orientation="horizontal"
-        android:paddingVertical="@dimen/space_12"
+        android:paddingVertical="@dimen/dimen_12_dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText
@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/space_22"
+            android:layout_marginStart="@dimen/dimen_22_dp"
             android:layout_weight="1"
             android:background="@null"
             android:fadeScrollbars="false"
@@ -26,19 +26,19 @@
             android:hint="@string/enter_your_text"
             android:lineSpacingExtra="4sp"
             android:maxLines="5"
-            android:paddingEnd="@dimen/space_22"
+            android:paddingEnd="@dimen/dimen_22_dp"
             android:scrollbarStyle="outsideInset"
             android:scrollbarThumbVertical="@drawable/shape_scrollbar_thumb_vertical"
             android:scrollbarTrackVertical="@drawable/shape_scrollbar_track_vertical"
             android:scrollbars="vertical"
-            android:textSize="@dimen/size_14" />
+            android:textSize="@dimen/dimen_14_sp" />
 
         <ImageView
             android:id="@+id/send_imageView"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="bottom"
-            android:layout_marginHorizontal="@dimen/space_12"
+            android:layout_marginHorizontal="@dimen/dimen_12_dp"
             android:background="@drawable/shape_circle"
             android:backgroundTint="@color/light_slate_blue"
             android:scaleType="centerInside"

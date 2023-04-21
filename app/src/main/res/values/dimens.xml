@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="space_22">22dp</dimen>
-    <dimen name="space_12">12dp</dimen>
-    <dimen name="size_14">14sp</dimen>
-    <dimen name="space_24">24dp</dimen>
-    <dimen name="space_16">16dp</dimen>
-    <dimen name="space_30">30dp</dimen>
-    <dimen name="space_6">6dp</dimen>
+    <dimen name="dimen_22_dp">22dp</dimen>
+    <dimen name="dimen_12_dp">12dp</dimen>
+    <dimen name="dimen_14_sp">14sp</dimen>
+    <dimen name="dimen_24_sp">24dp</dimen>
+    <dimen name="dimen_16_dp">16dp</dimen>
+    <dimen name="dimen_30_dp">30dp</dimen>
+    <dimen name="dimen_6_dp">6dp</dimen>
 </resources>
