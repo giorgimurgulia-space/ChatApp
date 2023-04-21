@@ -12,8 +12,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="30dp" />
+        android:paddingHorizontal="@dimen/dimen_16_dp"
+        android:paddingBottom="@dimen/dimen_30_dp" />
 
     <View
         android:layout_width="6dp"
@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="30dp" />
+        android:paddingHorizontal="@dimen/dimen_16_dp"
+        android:paddingBottom="@dimen/dimen_30_dp" />
 
 </LinearLayout>

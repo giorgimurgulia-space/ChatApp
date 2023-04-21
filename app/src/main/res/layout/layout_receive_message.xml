@@ -10,12 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="@dimen/dimen_13_dp"
         android:background="@drawable/shape_color_background"
         android:backgroundTint="@color/white_smoke"
         android:lineSpacingExtra="@dimen/dimen_4_sp"
-        android:paddingHorizontal="18dp"
-        android:paddingVertical="15dp"
+        android:paddingHorizontal="@dimen/dimen_18_dp"
+        android:paddingVertical="@dimen/dimen_15_dp"
         tools:text="👋" />
 
 
@@ -23,7 +23,7 @@
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_gravity="start"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="@dimen/dimen_12_dp"
         android:layout_marginTop="-13dp"
         android:background="@drawable/shape_color_background"
         android:backgroundTint="@color/white_smoke" />
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginStart="29dp"
+        android:layout_marginStart="@dimen/dimen_29_dp"
         android:layout_marginTop="-5dp"
         tools:text="მარ 14, 16:06" />
 

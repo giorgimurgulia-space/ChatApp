@@ -10,13 +10,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginEnd="13dp"
+        android:layout_marginEnd="@dimen/dimen_13_dp"
         android:background="@drawable/shape_color_background"
         android:backgroundTint="@color/fog"
         android:lineSpacingExtra="@dimen/dimen_4_sp"
-        android:paddingHorizontal="18dp"
-        android:paddingVertical="15dp"
-        tools:text="giogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogiogio" />
+        android:paddingHorizontal="@dimen/dimen_18_dp"
+        android:paddingVertical="@dimen/dimen_15_dp"
+        tools:text="@tools:sample/lorem" />
 
 
     <View
@@ -24,7 +24,7 @@
         android:layout_height="18dp"
         android:layout_gravity="end"
         android:layout_marginTop="-13dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="@dimen/dimen_12_dp"
         android:background="@drawable/shape_color_background"
         android:backgroundTint="@color/fog" />
 
@@ -38,12 +38,11 @@
 
     <TextView
         style="@style/smallMyriadGeo_Regular"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="-5dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginEnd="@dimen/dimen_29_dp"
         tools:text="მარ 14, 16:06" />
 
 

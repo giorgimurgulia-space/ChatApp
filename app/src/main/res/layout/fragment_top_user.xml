@@ -10,7 +10,7 @@
         android:id="@+id/top_user_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="@dimen/dimen_18_dp"
         android:foregroundGravity="bottom"
         app:layout_constraintBottom_toTopOf="@id/input_layout"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_stroke_background"
+        android:background="@drawable/shape_input_background"
         android:orientation="horizontal"
         android:paddingVertical="@dimen/dimen_12_dp"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -53,7 +53,7 @@
             android:background="@drawable/shape_circle"
             android:backgroundTint="@color/light_slate_blue"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_send_icon" />
+            android:src="@drawable/ic_send" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

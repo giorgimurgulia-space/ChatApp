@@ -1,7 +1,9 @@
 package com.insurance.chatapp
 
+import android.app.UiModeManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.insurance.chatapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,5 +20,12 @@ class MainActivity : AppCompatActivity() {
             add(R.id.top_user_fragment, TopUserFragment())
             add(R.id.bottom_user_fragment, BottomUserFragment())
         }.commit()
+
+        if (binding.dayNightSwitch?.isChecked == true) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+        }
     }
 }
