@@ -12,7 +12,7 @@
         android:layout_gravity="end"
         android:layout_marginEnd="@dimen/dimen_13_dp"
         android:background="@drawable/shape_color_background"
-        android:backgroundTint="@color/fog"
+        android:backgroundTint="@color/purple_light"
         android:lineSpacingExtra="@dimen/dimen_4_sp"
         android:paddingHorizontal="@dimen/dimen_18_dp"
         android:paddingVertical="@dimen/dimen_15_dp"
@@ -26,7 +26,7 @@
         android:layout_marginTop="-13dp"
         android:layout_marginEnd="@dimen/dimen_12_dp"
         android:background="@drawable/shape_color_background"
-        android:backgroundTint="@color/fog" />
+        android:backgroundTint="@color/purple_light" />
 
     <View
         android:layout_width="10dp"
@@ -34,7 +34,7 @@
         android:layout_gravity="end"
         android:layout_marginTop="-5dp"
         android:background="@drawable/shape_color_background"
-        android:backgroundTint="@color/fog" />
+        android:backgroundTint="@color/purple_light" />
 
     <TextView
         style="@style/smallMyriadGeo_Regular"

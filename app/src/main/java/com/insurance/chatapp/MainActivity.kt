@@ -21,10 +21,12 @@ class MainActivity : AppCompatActivity() {
             add(R.id.bottom_user_fragment, BottomUserFragment())
         }.commit()
 
-        if (binding.dayNightSwitch?.isChecked == true) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        binding.dayNightSwitch?.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
 
         }
     }

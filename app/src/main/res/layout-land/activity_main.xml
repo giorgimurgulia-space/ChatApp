@@ -18,7 +18,7 @@
     <View
         android:layout_width="6dp"
         android:layout_height="match_parent"
-        android:background="@color/F7CE7F" />
+        android:background="@color/divider_primary" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/bottom_user_fragment"

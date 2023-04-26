@@ -51,7 +51,7 @@
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="@dimen/dimen_12_dp"
             android:background="@drawable/shape_circle"
-            android:backgroundTint="@color/light_slate_blue"
+            android:backgroundTint="@color/purple_default"
             android:scaleType="centerInside"
             android:src="@drawable/ic_send" />
     </LinearLayout>

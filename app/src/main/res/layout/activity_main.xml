@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/day_night_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_6_dp"
-        android:background="@color/F7CE7F" />
+        android:background="@color/divider_primary" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/bottom_user_fragment"
