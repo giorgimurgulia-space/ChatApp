@@ -1,4 +1,4 @@
-package com.insurance.chatapp
+package com.insurance.chatapp.ui.chat.model
 
 data class MessageUiModel(
     val text: String,

@@ -1,4 +1,6 @@
-package com.insurance.chatapp
+package com.insurance.chatapp.ui.chat
+
+import com.insurance.chatapp.ui.chat.model.MessageUiModel
 
 sealed class ChatListItem(val viewType: Int) {
 

@@ -1,4 +1,4 @@
-package com.insurance.chatapp
+package com.insurance.chatapp.ui.chat.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.insurance.chatapp.ui.chat.ChatListItem
+import com.insurance.chatapp.R
+import com.insurance.chatapp.common.MainDiffUtil
 import com.insurance.chatapp.databinding.LayoutReceiveMessageBinding
 import com.insurance.chatapp.databinding.LayoutSendMessageBinding
 

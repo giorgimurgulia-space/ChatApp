@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.insurance.chatapp.databinding.FragmentBottomUserBinding
 import com.insurance.chatapp.databinding.FragmentChatBinding
+import com.insurance.chatapp.ui.chat.ChatViewModel
+import com.insurance.chatapp.ui.chat.adapter.ChatListAdapter
 
 abstract class ChatFragment : Fragment() {
 
@@ -17,7 +19,7 @@ abstract class ChatFragment : Fragment() {
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ChatFragmentViewModel by viewModels()
+    private val viewModel: ChatViewModel by viewModels()
 
     val adapter = ChatListAdapter()
 
@@ -59,13 +61,13 @@ class BottomUserFragment : ChatFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        adapter.submitList(listOf(
-            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
-            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
-            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
-            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
-            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
-        ))
+//        adapter.submitList(listOf(
+//            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+//            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+//            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+//            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+//            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+//        ))
     }
 }
 

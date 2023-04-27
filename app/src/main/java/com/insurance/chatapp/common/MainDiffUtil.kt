@@ -1,4 +1,4 @@
-package com.insurance.chatapp
+package com.insurance.chatapp.common
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
