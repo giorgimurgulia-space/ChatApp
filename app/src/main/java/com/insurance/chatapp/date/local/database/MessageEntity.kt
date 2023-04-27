@@ -10,5 +10,5 @@ data class MessageEntity(
     val messageId: String,
     val messageAuthor: MessageAuthorEnum,
     val messageText: String,
-    val messageDate: Long
+    val messageDate: Long?
 )
