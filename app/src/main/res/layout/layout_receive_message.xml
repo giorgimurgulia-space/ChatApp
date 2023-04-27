@@ -1,49 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/message_textView"
         style="@style/normalMyriadGeo_Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="@dimen/dimen_13_dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/shape_color_background"
         android:backgroundTint="@color/neutral_05_lightest_grey"
         android:lineSpacingExtra="@dimen/dimen_4_sp"
         android:paddingHorizontal="@dimen/dimen_18_dp"
         android:paddingVertical="@dimen/dimen_15_dp"
+        app:layout_constraintBottom_toBottomOf="@id/medium_circle_view"
+        app:layout_constraintStart_toStartOf="@id/medium_circle_view"
         tools:text="👋" />
 
-
     <View
+        android:id="@+id/medium_circle_view"
         android:layout_width="@dimen/dimen_18_dp"
         android:layout_height="@dimen/dimen_18_dp"
-        android:layout_gravity="start"
-        android:layout_marginStart="@dimen/dimen_12_dp"
-        android:layout_marginTop="-13dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/shape_color_background"
-        android:backgroundTint="@color/neutral_05_lightest_grey" />
+        android:backgroundTint="@color/neutral_05_lightest_grey"
+        app:layout_constraintBottom_toBottomOf="@id/small_circle_view"
+        app:layout_constraintStart_toEndOf="@id/small_circle_view" />
 
     <View
+        android:id="@+id/small_circle_view"
         android:layout_width="@dimen/dimen_10_dp"
         android:layout_height="@dimen/dimen_10_dp"
-        android:layout_gravity="start"
-        android:layout_marginTop="-5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/shape_color_background"
-        android:backgroundTint="@color/neutral_05_lightest_grey" />
+        android:backgroundTint="@color/neutral_05_lightest_grey"
+        app:layout_constraintBottom_toBottomOf="@id/date_textView"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/date_textView"
         style="@style/smallMyriadGeo_Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="@dimen/dimen_29_dp"
-        android:layout_marginTop="-5dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/small_circle_view"
         tools:text="მარ 14, 16:06" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
