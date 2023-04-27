@@ -7,13 +7,13 @@
     android:focusableInTouchMode="true">
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/bottom_user_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_18_dp"
         android:foregroundGravity="bottom"
         app:layout_constraintBottom_toTopOf="@id/input_layout"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/layout_send_message" />
 
     <LinearLayout
@@ -42,7 +42,9 @@
             android:scrollbarStyle="outsideInset"
             android:scrollbarThumbVertical="@drawable/shape_scrollbar_thumb_vertical"
             android:scrollbarTrackVertical="@drawable/shape_scrollbar_track_vertical"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:textColor="@color/neutral_01_great_dark_grey"
+            android:textColorHint="@color/neutral_02_dark_grey" />
 
         <ImageView
             android:id="@+id/send_imageView"

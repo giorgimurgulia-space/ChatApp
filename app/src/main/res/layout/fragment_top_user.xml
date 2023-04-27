@@ -39,6 +39,8 @@
             android:hint="@string/enter_your_text"
             android:maxLines="5"
             android:paddingEnd="@dimen/dimen_22_dp"
+            android:textColor="@color/neutral_01_great_dark_grey"
+            android:textColorHint="@color/neutral_02_dark_grey"
             android:scrollbarStyle="outsideInset"
             android:scrollbarThumbVertical="@drawable/shape_scrollbar_thumb_vertical"
             android:scrollbarTrackVertical="@drawable/shape_scrollbar_track_vertical"
