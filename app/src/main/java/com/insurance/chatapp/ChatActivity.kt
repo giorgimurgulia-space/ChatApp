@@ -3,15 +3,15 @@ package com.insurance.chatapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
-import com.insurance.chatapp.databinding.ActivityMainBinding
+import com.insurance.chatapp.databinding.ActivityChatBinding
 
 class ChatActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityChatBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityChatBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
