@@ -9,5 +9,6 @@ data class MessageEntity(
     @PrimaryKey
     val messageId: String,
     val messageAuthor: MessageAuthorEnum,
-    val messageText:String
+    val messageText: String,
+    val messageDate: Long
 )
