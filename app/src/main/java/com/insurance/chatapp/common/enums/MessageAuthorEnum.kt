@@ -1,4 +1,4 @@
-package com.insurance.chatapp.date.enums
+package com.insurance.chatapp.common.enums
 
 enum class MessageAuthorEnum {
     TOP,

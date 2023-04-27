@@ -2,7 +2,7 @@ package com.insurance.chatapp.date.local.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.insurance.chatapp.date.enums.MessageAuthorEnum
+import com.insurance.chatapp.common.enums.MessageAuthorEnum
 
 @Entity(tableName = "messages")
 data class MessageEntity(
