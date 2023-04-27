@@ -1,12 +1,11 @@
 package com.insurance.chatapp
 
-import android.app.UiModeManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import com.insurance.chatapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class ChatActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
