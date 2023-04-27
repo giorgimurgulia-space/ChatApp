@@ -7,8 +7,8 @@ import com.insurance.chatapp.common.enums.MessageAuthor
 @Entity(tableName = "messages")
 data class MessageEntity(
     @PrimaryKey(autoGenerate = true)
-    val messageId: Int,
+    val messageId: Int = 0,
     val messageAuthor: MessageAuthor,
     val messageText: String,
-    val messageDate: Long?
+    val messageDate: String?
 )

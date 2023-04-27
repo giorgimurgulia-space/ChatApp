@@ -5,7 +5,5 @@ import javax.inject.Inject
 
 class GetMessagesUseCase @Inject constructor(private val messageRepository: MessageRepository) {
 
-    suspend fun invoke() =
-        messageRepository.getMessages()
-
+    suspend fun invoke() = messageRepository.getMessages()
 }
