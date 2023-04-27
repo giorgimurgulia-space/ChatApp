@@ -1,4 +1,4 @@
-package com.insurance.chatapp
+package com.insurance.chatapp.ui.chat
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.insurance.chatapp.databinding.FragmentChatBinding
-import com.insurance.chatapp.ui.chat.ChatViewModel
 import com.insurance.chatapp.ui.chat.adapter.ChatListAdapter
+import com.insurance.chatapp.ui.chat.model.MessageUiModel
 
 abstract class ChatFragment : Fragment() {
 
@@ -61,13 +61,23 @@ class BottomUserFragment : ChatFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-//        adapter.submitList(listOf(
-//            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
-//            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
-//            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
-//            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
-//            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
-//        ))
+        adapter.submitList(listOf(
+            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+        ))
     }
 }
 
@@ -75,4 +85,37 @@ class TopUserFragment : ChatFragment() {
 
     override val chatType: ChatType
         get() = ChatType.TOP
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        adapter.submitList(listOf(
+            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Sender(MessageUiModel("გამგზავნი", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+            ChatListItem.Receiver(MessageUiModel("მიმღები", 123)),
+        ))
+    }
 }

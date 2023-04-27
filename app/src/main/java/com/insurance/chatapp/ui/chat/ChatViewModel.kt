@@ -1,7 +1,6 @@
 package com.insurance.chatapp.ui.chat
 
 import androidx.lifecycle.ViewModel
-import com.insurance.chatapp.ChatFragment
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class ChatViewModel : ViewModel() {

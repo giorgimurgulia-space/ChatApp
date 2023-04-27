@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_5_dp"
+        android:textColor="@color/neutral_01_great_dark_grey"
         android:background="@drawable/shape_color_background"
         android:backgroundTint="@color/neutral_05_lightest_grey"
         android:lineSpacingExtra="@dimen/dimen_4_sp"

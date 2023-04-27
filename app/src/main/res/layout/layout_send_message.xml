@@ -14,6 +14,7 @@
         android:background="@drawable/shape_color_background"
         android:backgroundTint="@color/purple_light"
         android:lineSpacingExtra="@dimen/dimen_4_sp"
+        android:textColor="@color/neutral_01_great_dark_grey"
         android:paddingHorizontal="@dimen/dimen_18_dp"
         android:paddingVertical="@dimen/dimen_15_dp"
         android:layout_marginBottom="@dimen/dimen_5_dp"
