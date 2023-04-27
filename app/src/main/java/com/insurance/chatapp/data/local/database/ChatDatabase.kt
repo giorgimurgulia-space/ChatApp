@@ -1,8 +1,8 @@
 package com.insurance.chatapp.data.local.database
 
 import androidx.room.*
-import com.insurance.chatapp.data.local.database.dao.Dao
-import com.insurance.chatapp.data.local.database.entity.MessageEntity
+import com.insurance.chatapp.data.local.database.model.dao.Dao
+import com.insurance.chatapp.data.local.database.model.entity.MessageEntity
 
 
 @androidx.room.Database(

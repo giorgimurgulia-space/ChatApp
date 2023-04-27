@@ -2,7 +2,7 @@ package com.insurance.chatapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.insurance.chatapp.data.local.database.dao.Dao
+import com.insurance.chatapp.data.local.database.model.dao.Dao
 import com.insurance.chatapp.data.local.database.ChatDatabase
 import dagger.Module
 import dagger.Provides

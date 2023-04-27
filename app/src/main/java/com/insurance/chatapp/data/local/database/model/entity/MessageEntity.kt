@@ -1,4 +1,4 @@
-package com.insurance.chatapp.data.local.database.entity
+package com.insurance.chatapp.data.local.database.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
