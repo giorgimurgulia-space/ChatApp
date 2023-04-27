@@ -1,9 +1,10 @@
-package com.insurance.chatapp.date.local.database
+package com.insurance.chatapp.data.local.database.dao
 
 import androidx.room.Query
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import com.insurance.chatapp.data.local.database.entity.MessageEntity
 
 @Dao
 interface Dao {

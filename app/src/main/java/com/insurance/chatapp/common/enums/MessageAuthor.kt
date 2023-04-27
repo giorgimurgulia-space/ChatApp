@@ -1,6 +1,6 @@
 package com.insurance.chatapp.common.enums
 
-enum class MessageAuthorEnum {
+enum class MessageAuthor {
     TOP,
     BOTTOM
 }

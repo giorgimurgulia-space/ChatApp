@@ -2,8 +2,8 @@ package com.insurance.chatapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.insurance.chatapp.date.local.database.Dao
-import com.insurance.chatapp.date.local.database.Database
+import com.insurance.chatapp.data.local.database.dao.Dao
+import com.insurance.chatapp.data.local.database.ChatDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,14 +16,14 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Provides
     @Singleton
-    fun getDatabase(@ApplicationContext context: Context): Database =
+    fun provideChatDatabase(@ApplicationContext context: Context): ChatDatabase =
         Room.databaseBuilder(
             context,
-            Database::class.java,
-            "db"
+            ChatDatabase::class.java,
+            "chat.db"
         ).build()
 
     @Provides
     @Singleton
-    fun getDao(db: Database): Dao = db.getDao()
+    fun provideChatDao(db: ChatDatabase): Dao = db.getChatDao()
 }
