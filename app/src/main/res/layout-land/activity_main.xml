@@ -9,7 +9,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/top_user_fragment"
-        android:name="com.insurance.chatapp.TopUserFragment"
+        android:name="com.chatApp.chatapp.TopUserFragment"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -23,7 +23,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/bottom_user_fragment"
-        android:name="com.insurance.chatapp.BottomUserFragment"
+        android:name="com.chatApp.chatapp.BottomUserFragment"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
