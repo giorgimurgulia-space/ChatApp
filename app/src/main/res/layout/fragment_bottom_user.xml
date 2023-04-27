@@ -37,7 +37,7 @@
             android:fadeScrollbars="false"
             android:hint="@string/enter_your_text"
             android:lineSpacingExtra="@dimen/dimen_4_sp"
-            android:maxLines="5"
+            android:maxLines="4"
             android:paddingEnd="@dimen/dimen_22_dp"
             android:scrollbarStyle="outsideInset"
             android:scrollbarThumbVertical="@drawable/shape_scrollbar_thumb_vertical"

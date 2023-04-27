@@ -37,7 +37,7 @@
             android:fadeScrollbars="false"
             android:lineSpacingExtra="@dimen/dimen_4_sp"
             android:hint="@string/enter_your_text"
-            android:maxLines="5"
+            android:maxLines="4"
             android:paddingEnd="@dimen/dimen_22_dp"
             android:textColor="@color/neutral_01_great_dark_grey"
             android:textColorHint="@color/neutral_02_dark_grey"
