@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ChatApp</string>
+    <string name="enter_your_text">დაწერე შეტყობინება ...</string>
 </resources>
