@@ -1,4 +1,4 @@
-package com.chatApp.chatapp
+package com.insurance.chatapp
 
 import org.junit.Test
 

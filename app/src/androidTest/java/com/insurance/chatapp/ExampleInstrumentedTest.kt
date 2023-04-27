@@ -1,4 +1,4 @@
-package com.chatApp.chatapp
+package com.insurance.chatapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

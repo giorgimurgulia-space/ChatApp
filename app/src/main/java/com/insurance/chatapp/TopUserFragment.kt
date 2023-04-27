@@ -1,20 +1,20 @@
-package com.chatApp.chatapp
+package com.insurance.chatapp
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.chatApp.chatapp.databinding.FragmentBottomUserBinding
+import com.insurance.chatapp.databinding.FragmentTopUserBinding
 
-class BottomUserFragment : Fragment() {
-    private lateinit var binding: FragmentBottomUserBinding
+class TopUserFragment : Fragment() {
+    private lateinit var binding: FragmentTopUserBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBottomUserBinding.inflate(inflater)
+        binding = FragmentTopUserBinding.inflate(inflater)
         return binding.root
     }
 
@@ -22,4 +22,5 @@ class BottomUserFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
+
 }
