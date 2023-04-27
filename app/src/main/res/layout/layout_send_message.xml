@@ -20,8 +20,8 @@
 
 
     <View
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="@dimen/dimen_18_dp"
+        android:layout_height="@dimen/dimen_18_dp"
         android:layout_gravity="end"
         android:layout_marginTop="-13dp"
         android:layout_marginEnd="@dimen/dimen_12_dp"
@@ -29,8 +29,8 @@
         android:backgroundTint="@color/purple_light" />
 
     <View
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="@dimen/dimen_10_dp"
+        android:layout_height="@dimen/dimen_10_dp"
         android:layout_gravity="end"
         android:layout_marginTop="-5dp"
         android:background="@drawable/shape_color_background"

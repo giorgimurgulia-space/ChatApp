@@ -28,7 +28,7 @@
         <EditText
             android:id="@+id/text_editText"
             style="@style/normalMyriadGeo_Regular"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_0_dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/dimen_22_dp"
@@ -46,8 +46,8 @@
 
         <ImageView
             android:id="@+id/send_imageView"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="@dimen/dimen_32_dp"
+            android:layout_height="@dimen/dimen_32_dp"
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="@dimen/dimen_12_dp"
             android:background="@drawable/shape_circle"
