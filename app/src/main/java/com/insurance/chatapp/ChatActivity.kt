@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.insurance.chatapp.databinding.ActivityChatBinding
 
 class ChatActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityChatBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +15,8 @@ class ChatActivity : AppCompatActivity() {
         binding = ActivityChatBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+
 
 //        supportFragmentManager.beginTransaction().apply {
 //            add(R.id.top_user_fragment, TopUserFragment())
