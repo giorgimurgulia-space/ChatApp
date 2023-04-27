@@ -3,10 +3,10 @@
     <item>
         <layer-list>
             <item
-                android:bottom="3dp"
-                android:end="3dp"
-                android:start="3dp"
-                android:top="3dp"
+                android:bottom="@dimen/dimen_3_dp"
+                android:end="@dimen/dimen_3_dp"
+                android:start="@dimen/dimen_3_dp"
+                android:top="@dimen/dimen_3_dp"
                 android:drawable="@drawable/ic_moon"/>
         </layer-list>
     </item>
