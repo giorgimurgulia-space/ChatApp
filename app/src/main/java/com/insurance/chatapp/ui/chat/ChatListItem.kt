@@ -7,6 +7,7 @@ sealed class ChatListItem(val viewType: Int) {
     companion object {
         const val VIEW_TYPE_SENDER = 0
         const val VIEW_TYPE_RECEIVER = 1
+        const val VIEW_TYPE_TYPING = 2
     }
 
     open class Message(open val message: MessageUiModel, type: Int) : ChatListItem(type)

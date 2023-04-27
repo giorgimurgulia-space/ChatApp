@@ -8,19 +8,20 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.insurance.chatapp.common.enums.MessageAuthor
 import com.insurance.chatapp.databinding.FragmentChatBinding
 import com.insurance.chatapp.ui.chat.adapter.ChatListAdapter
-import com.insurance.chatapp.ui.chat.model.MessageUiModel
+
 
 abstract class ChatFragment : Fragment() {
 
-    abstract val chatType: ChatType
+    abstract val messageAuthor: MessageAuthor
 
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ChatViewModel by viewModels()
-
+    val viewModel: ChatViewModel by viewModels()
     val adapter = ChatListAdapter()
 
     override fun onCreateView(
@@ -34,20 +35,28 @@ abstract class ChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.bottomUserRecycler.layoutManager= LinearLayoutManager(requireContext())
-        binding.bottomUserRecycler.adapter = adapter
 
-        binding.textEditText.doAfterTextChanged { viewModel.onInputTextChanged(it?.toString(), chatType) }
+        binding.chatRecycler.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, true)
+        binding.chatRecycler.adapter = adapter
 
+
+        binding.textEditText.doAfterTextChanged {
+            viewModel.onInputTextChanged(it?.toString(), messageAuthor)
+        }
+
+        binding.sendImageView.setOnClickListener {
+            val message = binding.textEditText.text?.toString()
+            if (!message.isNullOrEmpty()) {
+                viewModel.sendMessage(message, messageAuthor)
+            }
+            binding.textEditText.text = null
+        }
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-    enum class ChatType {
-        TOP, BOTTOM
     }
 }
 
