@@ -4,9 +4,9 @@ import com.insurance.chatapp.domain.models.message.MessageModel
 import com.insurance.chatapp.domain.repositorys.MessageRepository
 import javax.inject.Inject
 
-class InsertMessageUseCase @Inject constructor(private val messageRepository: MessageRepository) {
+class GetMessagesUseCase @Inject constructor(private val messageRepository: MessageRepository) {
 
-    suspend fun invoke(message: MessageModel) =
-        messageRepository.insertMessage(message)
+    suspend fun invoke() =
+        messageRepository.getMessages()
 
 }
