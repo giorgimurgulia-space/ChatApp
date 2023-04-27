@@ -12,5 +12,5 @@ interface Dao {
     suspend fun getMessages(): List<MessageEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCard(message: MessageEntity)
+    suspend fun insertMessage(message: MessageEntity)
 }
