@@ -5,11 +5,8 @@ import com.insurance.chatapp.data.local.database.model.dao.Dao
 import com.insurance.chatapp.data.local.database.model.entity.MessageEntity
 
 
-@androidx.room.Database(
-    entities = [
-        MessageEntity::class,
-    ],
-    version = 1
+@Database(
+    entities = [MessageEntity::class], version = 1
 )
 
 abstract class ChatDatabase : RoomDatabase() {
