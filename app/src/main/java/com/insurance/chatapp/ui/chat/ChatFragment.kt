@@ -24,7 +24,7 @@ abstract class ChatFragment : Fragment() {
     abstract val messageAuthor: MessageAuthor
 
     private var _binding: FragmentChatBinding? = null
-     val binding get() = _binding!!
+     private val binding get() = _binding!!
 
     val viewModel: ChatViewModel by activityViewModels()
     val adapter = ChatListAdapter()
