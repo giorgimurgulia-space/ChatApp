@@ -44,14 +44,16 @@ class ChatViewModel @Inject constructor(
     }
 
     fun onInputTextChanged(text: String?, messageAuthor: MessageAuthor) {
-        val messages = getMessagesUseCase.invoke().value
+        if (isOnline(ApplicationContext)) {
+            val messages = getMessagesUseCase.invoke().value
 
-        if (text.isNullOrEmpty()) {
-            buildChatList(messages)
-        } else {
-            buildChatList(
-                listOf(MessageModel(null, messageAuthor, null)) + messages
-            )
+            if (text.isNullOrEmpty()) {
+                buildChatList(messages)
+            } else {
+                buildChatList(
+                    listOf(MessageModel(null, messageAuthor, null)) + messages
+                )
+            }
         }
     }
 
