@@ -6,7 +6,6 @@ import javax.inject.Inject
 
 class InsertMessageUseCase @Inject constructor(private val messageRepository: MessageRepository) {
 
-    suspend fun invoke(message: MessageModel) =
-        messageRepository.insertMessage(message)
+    suspend fun invoke(message: MessageModel) = messageRepository.insertMessage(message)
 
 }

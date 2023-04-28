@@ -2,6 +2,7 @@ package com.insurance.chatapp.ui.chat
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -27,6 +28,5 @@ class TopUserFragment : ChatFragment() {
                 }
             }
         }
-
     }
 }

@@ -38,7 +38,6 @@ class ChatListAdapter : ListAdapter<ChatListItem, RecyclerView.ViewHolder>(
 
         when (holder) {
             is MessageViewHolder -> holder.bind(data as ChatListItem.Message)
-            is MessageTypingViewHolder -> holder.bind(data as ChatListItem.Message)
         }
     }
 
@@ -63,10 +62,5 @@ class ChatListAdapter : ListAdapter<ChatListItem, RecyclerView.ViewHolder>(
 
     class MessageTypingViewHolder(
         private val view: View
-    ) : RecyclerView.ViewHolder(view) {
-        fun bind(message: ChatListItem.Message) {
-
-        }
-    }
-
+    ) : RecyclerView.ViewHolder(view)
 }
