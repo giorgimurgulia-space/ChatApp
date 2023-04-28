@@ -71,29 +71,39 @@ class ChatViewModel @Inject constructor(
 
 
     private fun buildChatList(messages: List<MessageModel>) {
-        val topChatListItems = messages.mapNotNull {
-            when (it.messageAuthor) {
-                MessageAuthor.TOP -> {
-                    if (it.messageText != null) {
-                        ChatListItem.Sender(MessageUiModel(it.messageText, it.messageDate))
-                    } else {
-                        null
-                    }
-                }
-                MessageAuthor.BOTTOM -> {
-                    if (it.messageText.isNullOrEmpty()) {
-                        ChatListItem.Typing
-                    } else if (it.messageDate.isNullOrEmpty()) {
-                        null
-                    } else {
-                        ChatListItem.Receiver(MessageUiModel(it.messageText, it.messageDate))
-                    }
-                }
-            }
-        }
+
+        val topChatListItems = buildTopChatList(messages)
         _topUserState.value = topChatListItems
 
-        val bottomChatListItems = messages.mapNotNull {
+        val bottomChatListItems = buildBottomChatList(messages)
+        _bottomUserState.value = bottomChatListItems
+    }
+
+    private fun buildTopChatList(messages: List<MessageModel>): List<ChatListItem> {
+        return messages.mapNotNull {
+            when (it.messageAuthor) {
+                MessageAuthor.TOP -> {
+                    if (it.messageText != null) {
+                        ChatListItem.Sender(MessageUiModel(it.messageText, it.messageDate))
+                    } else {
+                        null
+                    }
+                }
+                MessageAuthor.BOTTOM -> {
+                    if (it.messageText.isNullOrEmpty()) {
+                        ChatListItem.Typing
+                    } else if (it.messageDate.isNullOrEmpty()) {
+                        null
+                    } else {
+                        ChatListItem.Receiver(MessageUiModel(it.messageText, it.messageDate))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun buildBottomChatList(messages: List<MessageModel>): List<ChatListItem> {
+        return messages.mapNotNull {
             when (it.messageAuthor) {
                 MessageAuthor.BOTTOM -> {
                     if (it.messageText != null) {
@@ -113,8 +123,6 @@ class ChatViewModel @Inject constructor(
                 }
             }
         }
-
-        _bottomUserState.value = bottomChatListItems
     }
 
     @SuppressLint("SimpleDateFormat")
