@@ -81,6 +81,8 @@ class ChatViewModel @Inject constructor(
                 MessageAuthor.BOTTOM -> {
                     if (it.messageText.isNullOrEmpty()) {
                         ChatListItem.Typing
+                    } else if (it.messageDate.isNullOrEmpty()) {
+                        null
                     } else {
                         ChatListItem.Receiver(MessageUiModel(it.messageText, it.messageDate))
                     }
@@ -101,6 +103,8 @@ class ChatViewModel @Inject constructor(
                 MessageAuthor.TOP -> {
                     if (it.messageText.isNullOrEmpty()) {
                         ChatListItem.Typing
+                    } else if (it.messageDate.isNullOrEmpty()) {
+                        null
                     } else {
                         ChatListItem.Receiver(MessageUiModel(it.messageText, it.messageDate))
                     }
