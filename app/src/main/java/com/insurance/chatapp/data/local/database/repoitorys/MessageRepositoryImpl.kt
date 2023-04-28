@@ -13,9 +13,9 @@ import javax.inject.Inject
 class MessageRepositoryImpl @Inject constructor(private val dao: Dao) : MessageRepository {
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
-    private lateinit var stateFlow: StateFlow<List<MessageModel>>
+    private var stateFlow: StateFlow<List<MessageModel>>
 
-    override suspend fun insertMessage(message: MessageModel): Boolean {
+    override suspend fun insertMessage(message: MessageModel) {
         dao.insertMessage(
             MessageEntity(
                 messageAuthor = message.messageAuthor,
@@ -23,11 +23,6 @@ class MessageRepositoryImpl @Inject constructor(private val dao: Dao) : MessageR
                 messageDate = message.messageDate
             )
         )
-//        val messagesEntity = dao.getMessages().firstOrNull {
-//            it.messageDate == null
-//        }
-
-        return true
 
     }
 

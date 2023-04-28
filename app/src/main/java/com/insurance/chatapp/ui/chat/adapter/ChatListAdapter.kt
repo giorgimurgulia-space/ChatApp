@@ -1,5 +1,6 @@
 package com.insurance.chatapp.ui.chat.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +57,7 @@ class ChatListAdapter : ListAdapter<ChatListItem, RecyclerView.ViewHolder>(
                 view.findViewById<TextView>(R.id.date_textView).text = message.message.messageDate
             } else {
                 view.findViewById<TextView>(R.id.date_textView).text = "არ გაიგზავნა"
+                view.findViewById<TextView>(R.id.date_textView).setTextColor(Color.RED)
             }
         }
     }
