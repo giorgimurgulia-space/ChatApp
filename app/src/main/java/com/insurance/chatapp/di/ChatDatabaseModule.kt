@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DatabaseModule {
+class ChatDatabaseModule {
     @Provides
     @Singleton
     fun provideChatDatabase(@ApplicationContext context: Context): ChatDatabase =
