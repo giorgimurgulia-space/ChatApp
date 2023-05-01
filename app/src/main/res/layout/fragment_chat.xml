@@ -7,14 +7,13 @@
     android:focusableInTouchMode="true">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/top_user_recycler"
+        android:id="@+id/chat_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="@dimen/dimen_18_dp"
-        android:foregroundGravity="bottom"
         app:layout_constraintBottom_toTopOf="@id/input_layout"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/layout_receive_message" />
+        tools:listitem="@layout/layout_send_message" />
 
     <LinearLayout
         android:id="@+id/input_layout"
@@ -35,16 +34,16 @@
             android:layout_weight="1"
             android:background="@null"
             android:fadeScrollbars="false"
-            android:lineSpacingExtra="@dimen/dimen_4_sp"
             android:hint="@string/enter_your_text"
+            android:lineSpacingExtra="@dimen/dimen_4_sp"
             android:maxLines="4"
             android:paddingEnd="@dimen/dimen_22_dp"
-            android:textColor="@color/neutral_01_great_dark_grey"
-            android:textColorHint="@color/neutral_02_dark_grey"
             android:scrollbarStyle="outsideInset"
             android:scrollbarThumbVertical="@drawable/shape_scrollbar_thumb_vertical"
             android:scrollbarTrackVertical="@drawable/shape_scrollbar_track_vertical"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:textColor="@color/neutral_02_dark_grey"
+            android:textColorHint="@color/neutral_02_dark_grey" />
 
         <ImageView
             android:id="@+id/send_imageView"
