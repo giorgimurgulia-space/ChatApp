@@ -1,9 +1,12 @@
 package com.space.chatapp.ui.chat
 
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
@@ -11,8 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.space.chatapp.databinding.FragmentChatBinding
 import com.space.chatapp.common.enums.MessageAuthor
+import com.space.chatapp.databinding.FragmentChatBinding
 import com.space.chatapp.ui.chat.adapter.ChatListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,10 +25,15 @@ abstract class ChatFragment : Fragment() {
     abstract val messageAuthor: MessageAuthor
 
     private var _binding: FragmentChatBinding? = null
-     private val binding get() = _binding!!
+    private val binding get() = _binding!!
 
     val viewModel: ChatViewModel by activityViewModels()
     val adapter = ChatListAdapter()
+
+    val handler = Handler()
+    val recyclerScrollRunnable = Runnable {
+        binding.chatRecycler.smoothScrollToPosition(0)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +61,11 @@ abstract class ChatFragment : Fragment() {
                 viewModel.sendMessage(message, messageAuthor)
             }
             binding.textEditText.text = null
-            ViewCompat.getWindowInsetsController(view)?.hide(WindowInsetsCompat.Type.ime())
+//            ViewCompat.getWindowInsetsController(view)?.hide(WindowInsetsCompat.Type.ime())
+
+            val imm: InputMethodManager =
+                requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 

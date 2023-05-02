@@ -23,8 +23,13 @@ class BottomUserFragment : ChatFragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.bottomUserState.collect {
                     adapter.submitList(it)
+                    scrollToTop()
                 }
             }
         }
+    }
+
+    private fun scrollToTop() {
+        handler.postDelayed(recyclerScrollRunnable, 300)
     }
 }
