@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.insurance.chatapp'
+    namespace 'com.space.chatapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.insurance.chatapp"
+        applicationId "com.space.chatapp"
         minSdk 26
         targetSdk 33
         versionCode 1
