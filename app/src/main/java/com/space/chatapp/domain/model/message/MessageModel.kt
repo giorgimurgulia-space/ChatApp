@@ -1,4 +1,4 @@
-package com.space.chatapp.domain.models.message
+package com.space.chatapp.domain.model.message
 
 import com.space.chatapp.common.enums.MessageAuthor
 

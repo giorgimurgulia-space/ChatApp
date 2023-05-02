@@ -8,9 +8,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.space.chatapp.common.enums.MessageAuthor
-import com.space.chatapp.domain.models.message.MessageModel
-import com.space.chatapp.domain.usecases.message.GetMessagesUseCase
-import com.space.chatapp.domain.usecases.message.InsertMessageUseCase
+import com.space.chatapp.domain.model.message.MessageModel
+import com.space.chatapp.domain.usecase.message.GetMessagesUseCase
+import com.space.chatapp.domain.usecase.message.InsertMessageUseCase
 import com.space.chatapp.ui.chat.model.MessageUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext

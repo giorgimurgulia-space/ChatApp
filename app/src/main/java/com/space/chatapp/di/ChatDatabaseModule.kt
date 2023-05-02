@@ -2,7 +2,7 @@ package com.space.chatapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.space.chatapp.data.local.database.model.dao.Dao
+import com.space.chatapp.data.local.database.model.dao.MessageDao
 import com.space.chatapp.data.local.database.ChatDatabase
 import dagger.Module
 import dagger.Provides
@@ -25,5 +25,5 @@ class ChatDatabaseModule {
 
     @Provides
     @Singleton
-    fun provideChatDao(db: ChatDatabase): Dao = db.getChatDao()
+    fun provideChatDao(db: ChatDatabase): MessageDao = db.getChatDao()
 }

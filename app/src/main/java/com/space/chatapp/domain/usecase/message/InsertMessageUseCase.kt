@@ -1,7 +1,7 @@
-package com.space.chatapp.domain.usecases.message
+package com.space.chatapp.domain.usecase.message
 
-import com.space.chatapp.domain.models.message.MessageModel
-import com.space.chatapp.domain.repositorys.MessageRepository
+import com.space.chatapp.domain.model.message.MessageModel
+import com.space.chatapp.domain.repository.MessageRepository
 import javax.inject.Inject
 
 class InsertMessageUseCase @Inject constructor(private val messageRepository: MessageRepository) {

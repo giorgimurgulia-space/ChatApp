@@ -8,7 +8,7 @@ import com.space.chatapp.data.local.database.model.entity.MessageEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface Dao {
+interface MessageDao {
 
     @Query("select * from messages")
     fun getMessages(): Flow<List<MessageEntity>>

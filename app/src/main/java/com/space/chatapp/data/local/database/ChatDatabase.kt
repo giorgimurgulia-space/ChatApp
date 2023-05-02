@@ -1,7 +1,7 @@
 package com.space.chatapp.data.local.database
 
 import androidx.room.*
-import com.space.chatapp.data.local.database.model.dao.Dao
+import com.space.chatapp.data.local.database.model.dao.MessageDao
 import com.space.chatapp.data.local.database.model.entity.MessageEntity
 
 
@@ -10,5 +10,5 @@ import com.space.chatapp.data.local.database.model.entity.MessageEntity
 )
 
 abstract class ChatDatabase : RoomDatabase() {
-    abstract fun getChatDao(): Dao
+    abstract fun getChatDao(): MessageDao
 }
