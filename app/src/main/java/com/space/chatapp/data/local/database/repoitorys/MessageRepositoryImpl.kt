@@ -30,7 +30,7 @@ class MessageRepositoryImpl @Inject constructor(private val dao: Dao) : MessageR
         val messagesEntity = dao.getMessages()
         stateFlow = messagesEntity.map {
             it.map {
-                MessageModel(it.messageText, it.messageAuthor, it.messageDate)
+                MessageModel(it.messageId, it.messageAuthor, it.messageText, it.messageDate)
             }
         }.map {
             it.reversed()

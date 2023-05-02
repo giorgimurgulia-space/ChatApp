@@ -51,7 +51,14 @@ class ChatViewModel @Inject constructor(
                 buildChatList(messages)
             } else {
                 buildChatList(
-                    listOf(MessageModel(null, messageAuthor, null)) + messages
+                    listOf(
+                        MessageModel(
+                            null,
+                            messageAuthor,
+                            null,
+                            null
+                        )
+                    ) + messages
                 )
             }
         }
@@ -65,7 +72,14 @@ class ChatViewModel @Inject constructor(
 
     private fun insertMessage(message: String, messageAuthor: MessageAuthor) {
         viewModelScope.launch {
-            insertMessageUseCase.invoke(MessageModel(message, messageAuthor, getCurrentDate()))
+            insertMessageUseCase.invoke(
+                MessageModel(
+                    null,
+                    messageAuthor = messageAuthor,
+                    messageText = message,
+                    messageDate = getCurrentDate()
+                )
+            )
         }
     }
 
@@ -84,7 +98,14 @@ class ChatViewModel @Inject constructor(
             when (it.messageAuthor) {
                 MessageAuthor.TOP -> {
                     if (it.messageText != null) {
-                        ChatListItem.Sender(MessageUiModel(it.messageText, it.messageDate))
+                        ChatListItem.Sender(
+                            MessageUiModel(
+                                it.messageId!!,
+                                it.messageAuthor,
+                                it.messageText,
+                                it.messageDate
+                            )
+                        )
                     } else {
                         null
                     }
@@ -95,7 +116,14 @@ class ChatViewModel @Inject constructor(
                     } else if (it.messageDate.isNullOrEmpty()) {
                         null
                     } else {
-                        ChatListItem.Receiver(MessageUiModel(it.messageText, it.messageDate))
+                        ChatListItem.Receiver(
+                            MessageUiModel(
+                                it.messageId!!,
+                                it.messageAuthor,
+                                it.messageText,
+                                it.messageDate
+                            )
+                        )
                     }
                 }
             }
@@ -107,7 +135,14 @@ class ChatViewModel @Inject constructor(
             when (it.messageAuthor) {
                 MessageAuthor.BOTTOM -> {
                     if (it.messageText != null) {
-                        ChatListItem.Sender(MessageUiModel(it.messageText, it.messageDate))
+                        ChatListItem.Sender(
+                            MessageUiModel(
+                                it.messageId!!,
+                                it.messageAuthor,
+                                it.messageText,
+                                it.messageDate
+                            )
+                        )
                     } else {
                         null
                     }
@@ -118,7 +153,14 @@ class ChatViewModel @Inject constructor(
                     } else if (it.messageDate.isNullOrEmpty()) {
                         null
                     } else {
-                        ChatListItem.Receiver(MessageUiModel(it.messageText, it.messageDate))
+                        ChatListItem.Receiver(
+                            MessageUiModel(
+                                it.messageId!!,
+                                it.messageAuthor,
+                                it.messageText,
+                                it.messageDate
+                            )
+                        )
                     }
                 }
             }
