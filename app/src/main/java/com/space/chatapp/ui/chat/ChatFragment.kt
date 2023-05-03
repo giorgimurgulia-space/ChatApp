@@ -61,7 +61,6 @@ abstract class ChatFragment : Fragment() {
                 viewModel.sendMessage(message, messageAuthor)
             }
             binding.textEditText.text = null
-//            ViewCompat.getWindowInsetsController(view)?.hide(WindowInsetsCompat.Type.ime())
 
             val imm: InputMethodManager =
                 requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
