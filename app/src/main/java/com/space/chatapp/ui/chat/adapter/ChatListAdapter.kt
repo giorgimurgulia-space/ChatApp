@@ -1,5 +1,6 @@
 package com.space.chatapp.ui.chat.adapter
 
+import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +57,11 @@ class ChatListAdapter : ListAdapter<ChatListItem, RecyclerView.ViewHolder>(
             if (message.message.messageDate != null) {
                 view.findViewById<TextView>(R.id.date_textView).text = message.message.messageDate
             } else {
-                view.findViewById<TextView>(R.id.date_textView).text = "არ გაიგზავნა"
+//                view.findViewById<TextView>(R.id.date_textView).text = "არ გაიგზავნა"
+
+                view.findViewById<TextView>(R.id.date_textView).text =
+                    view.context.resources.getString(R.string.not_delivery)
+
                 view.findViewById<TextView>(R.id.date_textView).setTextColor(Color.RED)
             }
         }
