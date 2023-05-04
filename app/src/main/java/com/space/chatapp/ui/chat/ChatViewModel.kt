@@ -44,23 +44,59 @@ class ChatViewModel @Inject constructor(
             ) { messageState, notDeliveredMessages ->
                 messageState to notDeliveredMessages
             }.collect { (messageState, notDeliveredMessages) ->
-                if (messageState.messages.isNotEmpty()) {
-                    _chatState.value = listOf(
-                        if (!(messageState.typingIds.all { it == userId } || messageState.typingIds.isEmpty())) {
-                            MessageUiModel(
-                                UUID.randomUUID().toString(),
-                                null,
-                                getCurrentDate(),
-                                UUID.randomUUID().toString(),
-                            )
-                        } else {
-                            null
-                        }
-                    )
-                        .plus(notDeliveredMessages)
-                        .plus(toUiModel(messageState.messages)).filterNotNull()
-                }
+                _chatState.value = listOf(
+                    if (!(messageState.typingIds.all { it == userId } || messageState.typingIds.isEmpty())) {
+                        MessageUiModel(
+                            UUID.randomUUID().toString(),
+                            null,
+                            getCurrentDate(),
+                            UUID.randomUUID().toString(),
+                        )
+                    } else {
+                        null
+                    }
+                )
+                    .plus(notDeliveredMessages)
+                    .plus(toUiModel(messageState.messages)).filterNotNull()
+
             }
+        }
+    }
+
+    fun onInputTextChanged(message: String?, userId: String) {
+        if (isOnline(ApplicationContext) || message.isNullOrEmpty()) {
+            viewModelScope.launch {
+                setTypingUseCase.invoke(userId, typing = !message.isNullOrEmpty())
+            }
+        }
+    }
+
+    fun sendMessage(message: String, messageAuthor: String) {
+        if (isOnline(ApplicationContext)) {
+            viewModelScope.launch {
+                insertMessage(message, messageAuthor)
+            }
+        } else {
+            setNotDeliverMessage(message, messageAuthor)
+        }
+    }
+
+    fun onMessageClick(message: MessageUiModel) {
+        if (notDeliveryMessage.value.contains(message) && isOnline(ApplicationContext)) {
+            sendMessage(message.messageText!!, message.messageAuthor)
+            notDeliveryMessage.value.forEach {
+                if (it.messageId == message.messageId)
+                    removeNolDeliveryMessage(it)
+            }
+        }
+    }
+
+    private fun removeNolDeliveryMessage(message: MessageUiModel) {
+        notDeliveryMessage.getAndUpdate { set ->
+            val mutableSet = set.toMutableSet()
+            mutableSet.remove(message)
+
+            mutableSet
         }
     }
 
@@ -91,25 +127,6 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun onInputTextChanged(message: String?, userId: String) {
-        if (isOnline(ApplicationContext)) {
-            viewModelScope.launch {
-                setTypingUseCase.invoke(userId, typing = !message.isNullOrEmpty())
-            }
-        }
-    }
-
-    fun sendMessage(message: String, messageAuthor: String) {
-        if (isOnline(ApplicationContext)) {
-            viewModelScope.launch {
-                insertMessage(message, messageAuthor)
-            }
-        } else {
-            setNotDeliverMessage(message, messageAuthor)
-        }
-    }
-
-
     private fun insertMessage(message: String, messageAuthor: String) {
         viewModelScope.launch {
             insertMessageUseCase.invoke(
@@ -122,7 +139,6 @@ class ChatViewModel @Inject constructor(
             )
         }
     }
-
 
     @SuppressLint("SimpleDateFormat")
     private fun getCurrentDate(): String {
@@ -151,10 +167,5 @@ class ChatViewModel @Inject constructor(
         }
         return false
     }
-
-    data class MessagesState(
-        val messages: List<MessageUiModel>,
-        val typingIds: List<String>
-    )
 }
 

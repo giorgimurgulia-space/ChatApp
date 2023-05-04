@@ -1,5 +1,6 @@
 package com.space.chatapp.ui.chat.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ class ChatListAdapter(private val userid: String) :
     ListAdapter<MessageUiModel, ChatListAdapter.MessageViewHolder>(
         ChatMessageDiffUtil()
     ) {
+    private var callBack: CallBack? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         return MessageViewHolder(
@@ -27,14 +29,19 @@ class ChatListAdapter(private val userid: String) :
         )
     }
 
+    fun setCallBack(callBack: CallBack) {
+        this.callBack = callBack
+    }
+
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         holder.bind(getItem(position), userid)
     }
 
-    class MessageViewHolder(
+    inner class MessageViewHolder(
         private val binding: LayoutReceiveMessageBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("ResourceAsColor")
         fun bind(message: MessageUiModel, userid: String) = with(binding) {
             if (message.messageText != null) {
                 messageTextView.text = message.messageText
@@ -44,6 +51,7 @@ class ChatListAdapter(private val userid: String) :
 
             if (message.messageDate != null) {
                 dateTextView.text = message.messageDate
+                dateTextView.setTextColor(R.color.neutral_01_great_dark_grey)
             } else {
                 dateTextView.text =
                     root.context.resources.getString(R.string.not_delivery)
@@ -64,7 +72,15 @@ class ChatListAdapter(private val userid: String) :
                 smallCircleView.setBkgTintColor(R.color.neutral_05_lightest_grey)
                 mediumCircleView.setBkgTintColor(R.color.neutral_05_lightest_grey)
             }
+
+            binding.messageTextView.setOnClickListener {
+                callBack?.onMessageClick(message)
+            }
         }
 
+    }
+
+    interface CallBack {
+        fun onMessageClick(message: MessageUiModel)
     }
 }

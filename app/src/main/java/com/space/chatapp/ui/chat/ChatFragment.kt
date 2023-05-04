@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.space.chatapp.databinding.FragmentChatBinding
 import com.space.chatapp.ui.chat.adapter.ChatListAdapter
+import com.space.chatapp.ui.chat.model.MessageUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -44,6 +45,14 @@ abstract class ChatFragment : Fragment() {
     ): View {
         _binding = FragmentChatBinding.inflate(inflater)
         return binding.root
+    }
+
+    init {
+        adapter.setCallBack(object : ChatListAdapter.CallBack {
+            override fun onMessageClick(message: MessageUiModel) {
+                viewModel.onMessageClick(message)
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,7 +83,7 @@ abstract class ChatFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.chatState.collect { messages ->
-                    adapter.submitList(messages)
+                    adapter.submitList(messages.toList())
                     scrollToTop()
                 }
             }
