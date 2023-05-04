@@ -6,32 +6,34 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsetsController
 import android.view.inputmethod.InputMethodManager
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.space.chatapp.common.enums.MessageAuthor
 import com.space.chatapp.databinding.FragmentChatBinding
 import com.space.chatapp.ui.chat.adapter.ChatListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 abstract class ChatFragment : Fragment() {
 
-    abstract val messageAuthor: MessageAuthor
+    abstract val userId: String
+    private val adapter by lazy { ChatListAdapter(userId) }
 
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
 
-    val viewModel: ChatViewModel by activityViewModels()
-    val adapter = ChatListAdapter()
+    private val viewModel: ChatViewModel by viewModels()
 
-    val handler = Handler()
-    val recyclerScrollRunnable = Runnable {
+    private val handler = Handler()
+    private val recyclerScrollRunnable = Runnable {
         binding.chatRecycler.smoothScrollToPosition(0)
     }
 
@@ -47,18 +49,20 @@ abstract class ChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getMessages(userId)
+
         binding.chatRecycler.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, true)
         binding.chatRecycler.adapter = adapter
 
         binding.textEditText.doAfterTextChanged {
-            viewModel.onInputTextChanged(it?.toString(), messageAuthor)
+            viewModel.onInputTextChanged(it?.toString(), userId)
         }
 
         binding.sendImageView.setOnClickListener {
             val message = binding.textEditText.text?.toString()
             if (!message.isNullOrEmpty()) {
-                viewModel.sendMessage(message, messageAuthor)
+                viewModel.sendMessage(message, userId)
             }
             binding.textEditText.text = null
 
@@ -66,6 +70,19 @@ abstract class ChatFragment : Fragment() {
                 requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.chatState.collect { messages ->
+                    adapter.submitList(messages)
+                    scrollToTop()
+                }
+            }
+        }
+    }
+
+    private fun scrollToTop() {
+        handler.postDelayed(recyclerScrollRunnable, 300)
     }
 
     override fun onDestroyView() {

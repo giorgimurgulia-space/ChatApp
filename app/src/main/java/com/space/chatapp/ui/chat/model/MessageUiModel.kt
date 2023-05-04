@@ -1,10 +1,11 @@
 package com.space.chatapp.ui.chat.model
 
-import com.space.chatapp.common.enums.MessageAuthor
+import com.space.chatapp.common.enum.MessageType
+
 
 data class MessageUiModel(
-    val messageId: Int,
-    val messageAuthor: MessageAuthor,
-    val messageText: String,
-    val messageDate: String?
+    val messageId: String,
+    val messageText: String?,
+    val messageDate: String?,
+    val messageAuthor: String,
 )

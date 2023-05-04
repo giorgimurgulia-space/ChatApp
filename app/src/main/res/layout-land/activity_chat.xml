@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_01_midnight_blue"
     android:orientation="horizontal"
     tools:context=".ChatActivity">
 
@@ -29,5 +30,14 @@
         android:layout_weight="1"
         android:paddingHorizontal="@dimen/dimen_16_dp"
         android:paddingBottom="@dimen/dimen_30_dp" />
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/day_night_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/dimen_24_sp"
+        android:layout_marginEnd="@dimen/dimen_16_dp"
+        android:thumb="@drawable/selector_switch_thumb"
+        app:track="@drawable/selector_switch_track" />
 
 </LinearLayout>

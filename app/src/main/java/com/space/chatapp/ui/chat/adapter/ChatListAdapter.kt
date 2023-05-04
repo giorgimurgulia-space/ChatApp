@@ -1,73 +1,70 @@
 package com.space.chatapp.ui.chat.adapter
 
-import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.space.chatapp.R
-import com.space.chatapp.databinding.LayoutMessageTypingBinding
+import com.space.chatapp.common.enum.MessageType
+import com.space.chatapp.common.extensions.setBkgTintColor
 import com.space.chatapp.databinding.LayoutReceiveMessageBinding
-import com.space.chatapp.databinding.LayoutSendMessageBinding
-import com.space.chatapp.ui.chat.ChatListItem
-import com.space.chatapp.common.MainDiffUtil
+import com.space.chatapp.ui.chat.model.MessageUiModel
 
-class ChatListAdapter : ListAdapter<ChatListItem, RecyclerView.ViewHolder>(
-    MainDiffUtil()
-) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
+class ChatListAdapter(private val userid: String) :
+    ListAdapter<MessageUiModel, ChatListAdapter.MessageViewHolder>(
+        ChatMessageDiffUtil()
+    ) {
 
-        return when (viewType) {
-            ChatListItem.VIEW_TYPE_SENDER -> MessageViewHolder(
-                LayoutSendMessageBinding.inflate(inflater, parent, false).root
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
+        return MessageViewHolder(
+            LayoutReceiveMessageBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
-            ChatListItem.VIEW_TYPE_RECEIVER -> MessageViewHolder(
-                LayoutReceiveMessageBinding.inflate(inflater, parent, false).root
-            )
-            ChatListItem.VIEW_TYPE_TYPING -> MessageTypingViewHolder(
-                LayoutMessageTypingBinding.inflate(inflater, parent, false).root
-            )
-            else -> throw java.lang.IllegalStateException("invalid ViewType: $viewType")
-        }
+        )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val data = getItem(position)
-
-        when (holder) {
-            is MessageViewHolder -> holder.bind(data as ChatListItem.Message)
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return getItem(position).viewType
+    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
+        holder.bind(getItem(position), userid)
     }
 
     class MessageViewHolder(
-        private val view: View
-    ) : RecyclerView.ViewHolder(view) {
+        private val binding: LayoutReceiveMessageBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(message: ChatListItem.Message) {
-
-            view.findViewById<TextView>(R.id.message_textView).text = message.message.messageText
-            if (message.message.messageDate != null) {
-                view.findViewById<TextView>(R.id.date_textView).text = message.message.messageDate
+        fun bind(message: MessageUiModel, userid: String) = with(binding) {
+            if (message.messageText != null) {
+                messageTextView.text = message.messageText
             } else {
-//                view.findViewById<TextView>(R.id.date_textView).text = "არ გაიგზავნა"
+                messageTextView.text = "..."
+            }
 
-                view.findViewById<TextView>(R.id.date_textView).text =
-                    view.context.resources.getString(R.string.not_delivery)
+            if (message.messageDate != null) {
+                dateTextView.text = message.messageDate
+            } else {
+                dateTextView.text =
+                    root.context.resources.getString(R.string.not_delivery)
+                dateTextView.setTextColor(Color.RED)
+            }
 
-                view.findViewById<TextView>(R.id.date_textView).setTextColor(Color.RED)
+            val flip = message.messageAuthor == userid
+            if (flip) {
+                root.layoutDirection = View.LAYOUT_DIRECTION_RTL
+
+                messageTextView.setBkgTintColor(R.color.purple_light)
+                smallCircleView.setBkgTintColor(R.color.purple_light)
+                mediumCircleView.setBkgTintColor(R.color.purple_light)
+            } else {
+                binding.root.layoutDirection = View.LAYOUT_DIRECTION_LTR
+
+                messageTextView.setBkgTintColor(R.color.neutral_05_lightest_grey)
+                smallCircleView.setBkgTintColor(R.color.neutral_05_lightest_grey)
+                mediumCircleView.setBkgTintColor(R.color.neutral_05_lightest_grey)
             }
         }
-    }
 
-    class MessageTypingViewHolder(
-        private val view: View
-    ) : RecyclerView.ViewHolder(view)
+    }
 }
