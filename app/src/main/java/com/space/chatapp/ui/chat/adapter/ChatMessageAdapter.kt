@@ -8,13 +8,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.space.chatapp.R
-import com.space.chatapp.common.enum.MessageType
 import com.space.chatapp.common.extensions.setBkgTintColor
 import com.space.chatapp.databinding.LayoutReceiveMessageBinding
 import com.space.chatapp.ui.chat.model.MessageUiModel
 
-class ChatListAdapter(private val userid: String) :
-    ListAdapter<MessageUiModel, ChatListAdapter.MessageViewHolder>(
+class ChatMessageAdapter(private val userid: String) :
+    ListAdapter<MessageUiModel, ChatMessageAdapter.MessageViewHolder>(
         ChatMessageDiffUtil()
     ) {
     private var callBack: CallBack? = null
@@ -73,8 +72,9 @@ class ChatListAdapter(private val userid: String) :
                 mediumCircleView.setBkgTintColor(R.color.neutral_05_lightest_grey)
             }
 
-            binding.messageTextView.setOnClickListener {
+            binding.messageTextView.setOnLongClickListener {
                 callBack?.onMessageClick(message)
+                true
             }
         }
 

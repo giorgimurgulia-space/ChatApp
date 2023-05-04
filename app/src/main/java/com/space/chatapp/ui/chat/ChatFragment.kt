@@ -6,7 +6,6 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsetsController
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -17,7 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.space.chatapp.databinding.FragmentChatBinding
-import com.space.chatapp.ui.chat.adapter.ChatListAdapter
+import com.space.chatapp.ui.chat.adapter.ChatMessageAdapter
 import com.space.chatapp.ui.chat.model.MessageUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,7 +25,7 @@ import kotlinx.coroutines.launch
 abstract class ChatFragment : Fragment() {
 
     abstract val userId: String
-    private val adapter by lazy { ChatListAdapter(userId) }
+    private val adapter by lazy { ChatMessageAdapter(userId) }
 
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
@@ -48,7 +47,7 @@ abstract class ChatFragment : Fragment() {
     }
 
     init {
-        adapter.setCallBack(object : ChatListAdapter.CallBack {
+        adapter.setCallBack(object : ChatMessageAdapter.CallBack {
             override fun onMessageClick(message: MessageUiModel) {
                 viewModel.onMessageClick(message)
             }
