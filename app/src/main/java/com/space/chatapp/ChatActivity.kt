@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import com.space.chatapp.databinding.ActivityChatBinding
-import com.space.chatapp.ui.chat.TopUserFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 

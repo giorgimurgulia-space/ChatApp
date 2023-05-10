@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.space.chatapp.R
 import com.space.chatapp.common.extensions.setBkgTintColor
-import com.space.chatapp.databinding.LayoutReceiveMessageBinding
+import com.space.chatapp.databinding.LayoutMessageBinding
 import com.space.chatapp.ui.chat.model.MessageUIModel
 
 class ChatMessageAdapter(private val userid: String) :
@@ -17,10 +17,9 @@ class ChatMessageAdapter(private val userid: String) :
     ) {
     private var callBack: CallBack? = null
 
-    //click
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         return MessageViewHolder(
-            LayoutReceiveMessageBinding.inflate(
+            LayoutMessageBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -38,7 +37,7 @@ class ChatMessageAdapter(private val userid: String) :
     }
 
     class MessageViewHolder(
-        private val binding: LayoutReceiveMessageBinding,
+        private val binding: LayoutMessageBinding,
         private val callBack: CallBack?
     ) : RecyclerView.ViewHolder(binding.root) {
 

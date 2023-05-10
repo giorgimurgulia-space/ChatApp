@@ -7,7 +7,6 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.space.chatapp.common.extensions.toUiModel
 import com.space.chatapp.domain.model.message.MessageModel
 import com.space.chatapp.domain.usecase.message.GetMessagesUseCase
 import com.space.chatapp.domain.usecase.message.InsertMessageUseCase
@@ -29,13 +28,22 @@ class ChatViewModel @Inject constructor(
     private val setTypingUseCase: SetTypingUseCase,
 ) : ViewModel() {
 
+    private lateinit var _userID: String
+    val userID get() = _userID
+
     private val _chatState = MutableStateFlow<List<MessageUIModel>>(listOf())
     val chatState get() = _chatState.asStateFlow()
 
     private val notDeliveryMessage = MutableStateFlow(setOf<MessageUIModel>())
 
 
-    fun getMessages(userId: String) {
+    fun setUserId(Id: String) {
+        if (!this::_userID.isInitialized) {
+            _userID = Id
+        }
+    }
+
+    fun getMessages() {
         viewModelScope.launch {
             combine(
                 getMessagesUseCase.invoke(),
@@ -44,7 +52,7 @@ class ChatViewModel @Inject constructor(
                 messageState to notDeliveredMessages
             }.collect { (messageState, notDeliveredMessages) ->
                 _chatState.value = listOf(
-                    if (!(messageState.typingIds.all { it == userId } || messageState.typingIds.isEmpty())) {
+                    if (!(messageState.typingIds.all { it == _userID } || messageState.typingIds.isEmpty())) {
                         MessageUIModel(
                             UUID.randomUUID().toString(),
                             null,
@@ -56,33 +64,33 @@ class ChatViewModel @Inject constructor(
                     }
                 )
                     .plus(notDeliveredMessages)
-                    .plus(messageState.messages.toUiModel()).filterNotNull()
+                    .plus(toUiModel(messageState.messages)).filterNotNull()
 
             }
         }
     }
 
-    fun onInputTextChanged(message: String?, userId: String) {
+    fun onInputTextChanged(message: String?) {
         if (isOnline(ApplicationContext) || message.isNullOrEmpty()) {
             viewModelScope.launch {
-                setTypingUseCase.invoke(userId, typing = !message.isNullOrEmpty())
+                setTypingUseCase.invoke(_userID, typing = !message.isNullOrEmpty())
             }
         }
     }
 
-    fun sendMessage(message: String, messageAuthor: String) {
+    fun sendMessage(message: String) {
         if (isOnline(ApplicationContext)) {
             viewModelScope.launch {
-                insertMessage(message, messageAuthor)
+                insertMessage(message)
             }
         } else {
-            setNotDeliverMessage(message, messageAuthor)
+            setNotDeliverMessage(message)
         }
     }
 
     fun onMessageClick(message: MessageUIModel) {
         if (notDeliveryMessage.value.contains(message) && isOnline(ApplicationContext)) {
-            sendMessage(message.messageText!!, message.messageAuthor)
+            sendMessage(message.messageText!!)
             notDeliveryMessage.value.forEach {
                 if (it.messageId == message.messageId)
                     removeNolDeliveryMessage(it)
@@ -99,7 +107,7 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    private fun setNotDeliverMessage(message: String, messageAuthor: String) {
+    private fun setNotDeliverMessage(message: String) {
         notDeliveryMessage.getAndUpdate { set ->
             val mutableSet = set.toMutableSet()
             mutableSet.add(
@@ -107,7 +115,7 @@ class ChatViewModel @Inject constructor(
                     UUID.randomUUID().toString(),
                     message,
                     null,
-                    messageAuthor,
+                    _userID,
                 )
             )
 
@@ -126,14 +134,14 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    private fun insertMessage(message: String, messageAuthor: String) {
+    private fun insertMessage(message: String) {
         viewModelScope.launch {
             insertMessageUseCase.invoke(
                 MessageModel(
                     UUID.randomUUID().toString(),
                     message,
                     getCurrentDate(),
-                    messageAuthor,
+                    _userID,
                 )
             )
         }
