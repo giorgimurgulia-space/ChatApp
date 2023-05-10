@@ -7,13 +7,12 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.space.chatapp.common.enum.MessageType
-import com.space.chatapp.data.local.database.repoitorys.MessageRepositoryImpl
+import com.space.chatapp.common.extensions.toUiModel
 import com.space.chatapp.domain.model.message.MessageModel
 import com.space.chatapp.domain.usecase.message.GetMessagesUseCase
 import com.space.chatapp.domain.usecase.message.InsertMessageUseCase
 import com.space.chatapp.domain.usecase.message.SetTypingUseCase
-import com.space.chatapp.ui.chat.model.MessageUiModel
+import com.space.chatapp.ui.chat.model.MessageUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
@@ -30,10 +29,10 @@ class ChatViewModel @Inject constructor(
     private val setTypingUseCase: SetTypingUseCase,
 ) : ViewModel() {
 
-    private val _chatState = MutableStateFlow<List<MessageUiModel>>(listOf())
+    private val _chatState = MutableStateFlow<List<MessageUIModel>>(listOf())
     val chatState get() = _chatState.asStateFlow()
 
-    private val notDeliveryMessage = MutableStateFlow(setOf<MessageUiModel>())
+    private val notDeliveryMessage = MutableStateFlow(setOf<MessageUIModel>())
 
 
     fun getMessages(userId: String) {
@@ -46,7 +45,7 @@ class ChatViewModel @Inject constructor(
             }.collect { (messageState, notDeliveredMessages) ->
                 _chatState.value = listOf(
                     if (!(messageState.typingIds.all { it == userId } || messageState.typingIds.isEmpty())) {
-                        MessageUiModel(
+                        MessageUIModel(
                             UUID.randomUUID().toString(),
                             null,
                             getCurrentDate(),
@@ -57,7 +56,7 @@ class ChatViewModel @Inject constructor(
                     }
                 )
                     .plus(notDeliveredMessages)
-                    .plus(toUiModel(messageState.messages)).filterNotNull()
+                    .plus(messageState.messages.toUiModel()).filterNotNull()
 
             }
         }
@@ -81,7 +80,7 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun onMessageClick(message: MessageUiModel) {
+    fun onMessageClick(message: MessageUIModel) {
         if (notDeliveryMessage.value.contains(message) && isOnline(ApplicationContext)) {
             sendMessage(message.messageText!!, message.messageAuthor)
             notDeliveryMessage.value.forEach {
@@ -91,7 +90,7 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    private fun removeNolDeliveryMessage(message: MessageUiModel) {
+    private fun removeNolDeliveryMessage(message: MessageUIModel) {
         notDeliveryMessage.getAndUpdate { set ->
             val mutableSet = set.toMutableSet()
             mutableSet.remove(message)
@@ -104,7 +103,7 @@ class ChatViewModel @Inject constructor(
         notDeliveryMessage.getAndUpdate { set ->
             val mutableSet = set.toMutableSet()
             mutableSet.add(
-                MessageUiModel(
+                MessageUIModel(
                     UUID.randomUUID().toString(),
                     message,
                     null,
@@ -116,9 +115,9 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    private fun toUiModel(messages: List<MessageModel>): List<MessageUiModel> {
+    private fun toUiModel(messages: List<MessageModel>): List<MessageUIModel> {
         return messages.map {
-            MessageUiModel(
+            MessageUIModel(
                 it.messageId,
                 it.messageText,
                 it.messageDate,

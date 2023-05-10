@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.space.chatapp.databinding.FragmentChatBinding
 import com.space.chatapp.ui.chat.adapter.ChatMessageAdapter
-import com.space.chatapp.ui.chat.model.MessageUiModel
+import com.space.chatapp.ui.chat.model.MessageUIModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -48,7 +48,7 @@ abstract class ChatFragment : Fragment() {
 
     init {
         adapter.setCallBack(object : ChatMessageAdapter.CallBack {
-            override fun onMessageClick(message: MessageUiModel) {
+            override fun onMessageClick(message: MessageUIModel) {
                 viewModel.onMessageClick(message)
             }
         })
