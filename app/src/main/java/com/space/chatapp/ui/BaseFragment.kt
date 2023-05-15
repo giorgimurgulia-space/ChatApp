@@ -9,12 +9,13 @@ import androidx.viewbinding.ViewBinding
 import com.space.chatapp.common.type.Inflater
 
 
-abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>) : Fragment() {
+open class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>) : Fragment() {
 
     private var _binding: VB? = null
     val binding get() = _binding!!
 
-    abstract fun init()
+    //init name
+    open fun init() {}
     open fun observe() {}
     open fun listener() {}
 

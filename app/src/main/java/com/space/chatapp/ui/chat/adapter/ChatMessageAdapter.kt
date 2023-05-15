@@ -1,5 +1,6 @@
 package com.space.chatapp.ui.chat.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +42,7 @@ class ChatMessageAdapter(private val userid: String) :
         private val callBack: CallBack?
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("ResourceAsColor")
         fun bind(message: MessageUIModel, userid: String) = with(binding) {
             val flip = message.messageAuthor == userid
 
@@ -59,19 +61,20 @@ class ChatMessageAdapter(private val userid: String) :
             }
 
 
-            if (message.messageDate != null) {
-                dateTextView.text = message.messageDate
-                dateTextView.setTextColor(Color.BLACK)
+            if (message.messageText.isNullOrEmpty()) {
+                messageTextView.text = "..."
             } else {
-                dateTextView.text =
-                    root.context.resources.getString(R.string.not_delivery)
-                dateTextView.setTextColor(Color.RED)
+                messageTextView.text = message.messageText
             }
 
-            if (message.messageText != null) {
-                messageTextView.text = message.messageText
+            if (message.messageDate.isNullOrEmpty()) {
+                messageTextView.setTextColor(R.color.neutral_great_dark_grey_80)
+                dateTextView.setTextColor(Color.RED)
+                dateTextView.text = root.context.resources.getString(R.string.not_delivery)
             } else {
-                messageTextView.text = "..."
+                messageTextView.setTextColor(Color.BLACK)
+                dateTextView.setTextColor(R.color.neutral_02_dark_grey)
+                dateTextView.text = message.messageDate
             }
 
             messageTextView.setOnLongClickListener {

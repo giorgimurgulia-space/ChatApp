@@ -44,6 +44,7 @@ class ChatViewModel @Inject constructor(
     }
 
     fun getMessages() {
+        //typing useCase
         viewModelScope.launch {
             combine(
                 getMessagesUseCase.invoke(),
@@ -155,6 +156,7 @@ class ChatViewModel @Inject constructor(
         return formatter.format(date)
     }
 
+    //extensions / class
     private fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

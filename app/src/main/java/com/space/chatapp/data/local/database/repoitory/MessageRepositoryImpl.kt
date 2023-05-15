@@ -1,4 +1,4 @@
-package com.space.chatapp.data.local.database.repoitorys
+package com.space.chatapp.data.local.database.repoitory
 
 import com.space.chatapp.data.local.database.model.dao.MessageDao
 import com.space.chatapp.data.local.database.model.entity.MessageEntity

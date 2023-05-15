@@ -71,6 +71,7 @@ abstract class ChatFragment : BaseFragment<FragmentChatBinding>(FragmentChatBind
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.chatState.collect { messages ->
                     adapter.submitList(messages.toList())
+                    //dilay
                     scrollToTop()
                 }
             }
@@ -78,6 +79,7 @@ abstract class ChatFragment : BaseFragment<FragmentChatBinding>(FragmentChatBind
     }
 
     private fun scrollToTop() {
+        //300 to const
         handler.postDelayed(recyclerScrollRunnable, 300)
     }
 }

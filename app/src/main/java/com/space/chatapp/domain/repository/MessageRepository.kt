@@ -1,6 +1,6 @@
 package com.space.chatapp.domain.repository
 
-import com.space.chatapp.data.local.database.repoitorys.MessageRepositoryImpl
+import com.space.chatapp.data.local.database.repoitory.MessageRepositoryImpl
 import com.space.chatapp.domain.model.message.MessageModel
 import kotlinx.coroutines.flow.StateFlow
 
