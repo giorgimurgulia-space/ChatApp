@@ -14,7 +14,6 @@ open class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>) : F
     private var _binding: VB? = null
     val binding get() = _binding!!
 
-    //init name
     open fun init() {}
     open fun observe() {}
     open fun listener() {}

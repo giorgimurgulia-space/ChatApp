@@ -7,7 +7,5 @@ import java.util.UUID
 @AndroidEntryPoint
 class ChatUserFragment : ChatFragment() {
 
-    //save instance ide
-
     override val userId = UUID.randomUUID().toString()
 }
