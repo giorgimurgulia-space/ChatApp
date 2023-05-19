@@ -12,6 +12,7 @@ import com.space.chatapp.common.extensions.setBkgTintColor
 import com.space.chatapp.databinding.LayoutMessageBinding
 import com.space.chatapp.ui.chat.model.MessageUIModel
 
+
 class ChatMessageAdapter(private val userid: String) :
     ListAdapter<MessageUIModel, ChatMessageAdapter.MessageViewHolder>(
         ChatMessageDiffUtil()
@@ -44,6 +45,7 @@ class ChatMessageAdapter(private val userid: String) :
 
         @SuppressLint("ResourceAsColor")
         fun bind(message: MessageUIModel, userid: String) = with(binding) {
+
             val flip = message.messageAuthor == userid
 
             if (flip) {
@@ -52,6 +54,7 @@ class ChatMessageAdapter(private val userid: String) :
                 messageTextView.setBkgTintColor(R.color.purple_light)
                 smallCircleView.setBkgTintColor(R.color.purple_light)
                 mediumCircleView.setBkgTintColor(R.color.purple_light)
+                messageTextView.text = message.messageText
             } else {
                 root.layoutDirection = View.LAYOUT_DIRECTION_LTR
 
@@ -60,11 +63,14 @@ class ChatMessageAdapter(private val userid: String) :
                 mediumCircleView.setBkgTintColor(R.color.neutral_05_lightest_grey)
             }
 
-
             if (message.messageText.isNullOrEmpty()) {
-                messageTextView.text = "..."
+                messageTextView.text = null
+                messageTextView.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.bkg_typing, 0, 0, 0
+                )
             } else {
                 messageTextView.text = message.messageText
+                messageTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
             }
 
             if (message.messageDate.isNullOrEmpty()) {
@@ -76,6 +82,8 @@ class ChatMessageAdapter(private val userid: String) :
                 dateTextView.setTextColor(R.color.neutral_02_dark_grey)
                 dateTextView.text = message.messageDate
             }
+
+
 
             messageTextView.setOnLongClickListener {
                 callBack?.onMessageClick(message)

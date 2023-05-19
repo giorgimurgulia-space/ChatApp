@@ -12,6 +12,6 @@ class ChatMessageDiffUtil : DiffUtil.ItemCallback<MessageUIModel>() {
 
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: MessageUIModel, newItem: MessageUIModel): Boolean {
-        return oldItem == newItem
+        return oldItem.messageText == newItem.messageText
     }
 }

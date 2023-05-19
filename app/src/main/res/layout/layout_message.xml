@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_5_dp"
         android:background="@drawable/shape_color_background"
-        android:backgroundTint="@color/neutral_05_lightest_grey"
         android:lineSpacingExtra="@dimen/dimen_4_sp"
         android:paddingHorizontal="@dimen/dimen_18_dp"
         android:paddingVertical="@dimen/dimen_15_dp"
@@ -23,8 +22,7 @@
         app:layout_constraintBottom_toBottomOf="@id/medium_circle_view"
         app:layout_constraintStart_toStartOf="@id/medium_circle_view"
         app:layout_constraintWidth_max="wrap"
-        app:layout_constraintWidth_percent="0.8"
-        tools:text="👋" />
+        app:layout_constraintWidth_percent="0.8" />
 
     <View
         android:id="@+id/medium_circle_view"
