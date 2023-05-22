@@ -46,25 +46,28 @@ class ChatMessageAdapter(private val userid: String) :
         @SuppressLint("ResourceAsColor")
         fun bind(message: MessageUIModel, userid: String) = with(binding) {
 
+
             val flip = message.messageAuthor == userid
+
+            val color = if (flip) {
+                R.color.purple_light
+            } else {
+                R.color.neutral_05_lightest_grey
+            }
+
+            messageTextView.setBkgTintColor(color)
+            smallCircleView.setBkgTintColor(color)
+            mediumCircleView.setBkgTintColor(color)
 
             if (flip) {
                 root.layoutDirection = View.LAYOUT_DIRECTION_RTL
-
-                messageTextView.setBkgTintColor(R.color.purple_light)
-                smallCircleView.setBkgTintColor(R.color.purple_light)
-                mediumCircleView.setBkgTintColor(R.color.purple_light)
                 messageTextView.text = message.messageText
             } else {
                 root.layoutDirection = View.LAYOUT_DIRECTION_LTR
-
-                messageTextView.setBkgTintColor(R.color.neutral_05_lightest_grey)
-                smallCircleView.setBkgTintColor(R.color.neutral_05_lightest_grey)
-                mediumCircleView.setBkgTintColor(R.color.neutral_05_lightest_grey)
             }
 
             if (message.messageText.isNullOrEmpty()) {
-                messageTextView.text = null
+                messageTextView.text = "null"
                 messageTextView.setCompoundDrawablesWithIntrinsicBounds(
                     R.drawable.bkg_typing, 0, 0, 0
                 )
