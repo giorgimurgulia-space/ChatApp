@@ -7,11 +7,11 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.space.chatapp.common.enums.MessageAuthor
 import com.space.chatapp.domain.model.message.MessageModel
 import com.space.chatapp.domain.usecase.message.GetMessagesUseCase
 import com.space.chatapp.domain.usecase.message.InsertMessageUseCase
-import com.space.chatapp.ui.chat.model.MessageUiModel
+import com.space.chatapp.domain.usecase.message.SetTypingUseCase
+import com.space.chatapp.ui.chat.model.MessageUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
@@ -22,159 +22,137 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
-    @ApplicationContext private val ApplicationContext: Context,
+    @SuppressLint("StaticFieldLeak") @ApplicationContext private val ApplicationContext: Context,
     private val getMessagesUseCase: GetMessagesUseCase,
-    private val insertMessageUseCase: InsertMessageUseCase
+    private val insertMessageUseCase: InsertMessageUseCase,
+    private val setTypingUseCase: SetTypingUseCase,
 ) : ViewModel() {
 
-    private val _topUserState = MutableStateFlow<List<ChatListItem>>(listOf())
-    val topUserState get() = _topUserState.asStateFlow()
+    private lateinit var _userID: String
+    val userID get() = _userID
 
-    private val _bottomUserState = MutableStateFlow<List<ChatListItem>>(listOf())
-    val bottomUserState get() = _bottomUserState.asStateFlow()
+    private val _chatState = MutableStateFlow<List<MessageUIModel>>(listOf())
+    val chatState get() = _chatState.asStateFlow()
 
-    init {
-        viewModelScope.launch {
-            getMessagesUseCase.invoke().collect {
-                if (it.isNotEmpty()) {
-                    buildChatList(it)
-                }
-            }
+    private val notDeliveryMessage = MutableStateFlow(setOf<MessageUIModel>())
+
+
+    fun setUserId(Id: String) {
+        if (!this::_userID.isInitialized) {
+            _userID = Id
         }
     }
 
-    fun onInputTextChanged(text: String?, messageAuthor: MessageAuthor) {
-        if (isOnline(ApplicationContext)) {
-            val messages = getMessagesUseCase.invoke().value
-
-            if (text.isNullOrEmpty()) {
-                buildChatList(messages)
-            } else {
-                buildChatList(
-                    listOf(
-                        MessageModel(
+    fun getMessages() {
+        viewModelScope.launch {
+            combine(
+                getMessagesUseCase.invoke(),
+                notDeliveryMessage
+            ) { messageState, notDeliveredMessages ->
+                messageState to notDeliveredMessages
+            }.collect { (messageState, notDeliveredMessages) ->
+                _chatState.value = listOf(
+                    if (!(messageState.typingIds.all { it == _userID } || messageState.typingIds.isEmpty())) {
+                        MessageUIModel(
+                            UUID.randomUUID().toString(),
                             null,
-                            messageAuthor,
-                            null,
-                            null
+                            getCurrentDate(),
+                            UUID.randomUUID().toString(),
                         )
-                    ) + messages
+                    } else {
+                        null
+                    }
                 )
+                    .plus(notDeliveredMessages)
+                    .plus(toUiModel(messageState.messages)).filterNotNull()
+
             }
         }
     }
 
-    fun sendMessage(message: String, messageAuthor: MessageAuthor) {
-        viewModelScope.launch {
-            insertMessage(message, messageAuthor)
+    fun onInputTextChanged(message: String?) {
+        if (isOnline(ApplicationContext) || message.isNullOrEmpty()) {
+            viewModelScope.launch {
+                setTypingUseCase.invoke(_userID, typing = !message.isNullOrEmpty())
+            }
         }
     }
 
-    private fun insertMessage(message: String, messageAuthor: MessageAuthor) {
+    fun sendMessage(message: String) {
+        if (isOnline(ApplicationContext)) {
+            viewModelScope.launch {
+                insertMessage(message)
+            }
+        } else {
+            setNotDeliverMessage(message)
+        }
+    }
+
+    fun onMessageClick(message: MessageUIModel) {
+        if (notDeliveryMessage.value.contains(message) && isOnline(ApplicationContext)) {
+            sendMessage(message.messageText!!)
+            notDeliveryMessage.value.forEach {
+                if (it.messageId == message.messageId)
+                    removeNolDeliveryMessage(it)
+            }
+        }
+    }
+
+    private fun removeNolDeliveryMessage(message: MessageUIModel) {
+        notDeliveryMessage.getAndUpdate { set ->
+            val mutableSet = set.toMutableSet()
+            mutableSet.remove(message)
+
+            mutableSet
+        }
+    }
+
+    private fun setNotDeliverMessage(message: String) {
+        notDeliveryMessage.getAndUpdate { set ->
+            val mutableSet = set.toMutableSet()
+            mutableSet.add(
+                MessageUIModel(
+                    UUID.randomUUID().toString(),
+                    message,
+                    null,
+                    _userID,
+                )
+            )
+
+            mutableSet
+        }
+    }
+
+    private fun toUiModel(messages: List<MessageModel>): List<MessageUIModel> {
+        return messages.map {
+            MessageUIModel(
+                it.messageId,
+                it.messageText,
+                it.messageDate,
+                it.messageAuthor,
+            )
+        }
+    }
+
+    private fun insertMessage(message: String) {
         viewModelScope.launch {
             insertMessageUseCase.invoke(
                 MessageModel(
-                    null,
-                    messageAuthor = messageAuthor,
-                    messageText = message,
-                    messageDate = getCurrentDate()
+                    UUID.randomUUID().toString(),
+                    message,
+                    getCurrentDate(),
+                    _userID,
                 )
             )
         }
     }
 
-
-    private fun buildChatList(messages: List<MessageModel>) {
-
-        val topChatListItems = buildTopChatList(messages)
-        _topUserState.value = topChatListItems
-
-        val bottomChatListItems = buildBottomChatList(messages)
-        _bottomUserState.value = bottomChatListItems
-    }
-
-    private fun buildTopChatList(messages: List<MessageModel>): List<ChatListItem> {
-        return messages.mapNotNull {
-            when (it.messageAuthor) {
-                MessageAuthor.TOP -> {
-                    if (it.messageText != null) {
-                        ChatListItem.Sender(
-                            MessageUiModel(
-                                it.messageId!!,
-                                it.messageAuthor,
-                                it.messageText,
-                                it.messageDate
-                            )
-                        )
-                    } else {
-                        null
-                    }
-                }
-                MessageAuthor.BOTTOM -> {
-                    if (it.messageText.isNullOrEmpty()) {
-                        ChatListItem.Typing
-                    } else if (it.messageDate.isNullOrEmpty()) {
-                        null
-                    } else {
-                        ChatListItem.Receiver(
-                            MessageUiModel(
-                                it.messageId!!,
-                                it.messageAuthor,
-                                it.messageText,
-                                it.messageDate
-                            )
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    private fun buildBottomChatList(messages: List<MessageModel>): List<ChatListItem> {
-        return messages.mapNotNull {
-            when (it.messageAuthor) {
-                MessageAuthor.BOTTOM -> {
-                    if (it.messageText != null) {
-                        ChatListItem.Sender(
-                            MessageUiModel(
-                                it.messageId!!,
-                                it.messageAuthor,
-                                it.messageText,
-                                it.messageDate
-                            )
-                        )
-                    } else {
-                        null
-                    }
-                }
-                MessageAuthor.TOP -> {
-                    if (it.messageText.isNullOrEmpty()) {
-                        ChatListItem.Typing
-                    } else if (it.messageDate.isNullOrEmpty()) {
-                        null
-                    } else {
-                        ChatListItem.Receiver(
-                            MessageUiModel(
-                                it.messageId!!,
-                                it.messageAuthor,
-                                it.messageText,
-                                it.messageDate
-                            )
-                        )
-                    }
-                }
-            }
-        }
-    }
-
     @SuppressLint("SimpleDateFormat")
-    private fun getCurrentDate(): String? {
-        return if (isOnline(ApplicationContext)) {
-            val formatter = SimpleDateFormat("yyyy-MM-dd")
-            val date = Date()
+    private fun getCurrentDate(): String {
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val date = Date()
 
-            formatter.format(date)
-        } else null
+        return formatter.format(date)
     }
 
     private fun isOnline(context: Context): Boolean {

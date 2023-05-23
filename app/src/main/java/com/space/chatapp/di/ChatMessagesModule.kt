@@ -1,6 +1,6 @@
 package com.space.chatapp.di
 
-import com.space.chatapp.data.local.database.repoitorys.MessageRepositoryImpl
+import com.space.chatapp.data.local.database.repoitory.MessageRepositoryImpl
 import com.space.chatapp.domain.repository.MessageRepository
 import dagger.Binds
 import dagger.Module

@@ -13,7 +13,7 @@
         android:layout_marginBottom="@dimen/dimen_18_dp"
         app:layout_constraintBottom_toTopOf="@id/input_layout"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/layout_send_message" />
+        tools:listitem="@layout/layout_message" />
 
     <LinearLayout
         android:id="@+id/input_layout"
@@ -42,7 +42,7 @@
             android:scrollbarThumbVertical="@drawable/shape_scrollbar_thumb_vertical"
             android:scrollbarTrackVertical="@drawable/shape_scrollbar_track_vertical"
             android:scrollbars="vertical"
-            android:textColor="@color/neutral_02_dark_grey"
+            android:textColor="@color/neutral_01_great_dark_grey"
             android:textColorHint="@color/neutral_02_dark_grey" />
 
         <ImageView
