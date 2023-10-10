@@ -20,7 +20,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/top_user_fragment"
-        android:name="com.space.chatapp.ui.chat.TopUserFragment"
+        android:name="com.space.chatapp.ui.chat.ChatUserFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0_dp"
         android:layout_weight="1"
@@ -34,7 +34,20 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/bottom_user_fragment"
-        android:name="com.space.chatapp.ui.chat.BottomUserFragment"
+        android:name="com.space.chatapp.ui.chat.ChatUserFragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_0_dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="@dimen/dimen_16_dp"
+        android:paddingBottom="@dimen/dimen_30_dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_6_dp"
+        android:background="@color/divider_primary" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/bottom1_user_fragment"
+        android:name="com.space.chatapp.ui.chat.ChatUserFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0_dp"
         android:layout_weight="1"
